@@ -16,5 +16,13 @@ div.box, div.cell{
 	width: 30px;
 	height: 30px;
 	font-size: 20;
-	text-align: center;
+	text-align: center;  
+}
+
+.incorrect{
+	background-color: yellow;
+}
+
+.value-provided{
+	background-color: #DDD;
 }
