@@ -1,10 +1,12 @@
 require 'sinatra'
 require 'sinatra/partial'
+require 'rack-flash'
 require_relative './lib/sudoku'
 require_relative './lib/cell'
 
 enable :sessions
 set :partial_template_engine, :erb
+use Rack::Flash
 
 def random_sudoku
   seed = (1..9).to_a.shuffle + Array.new(81-9, 0)
@@ -15,7 +17,10 @@ end
 
 # this method removes some digits from the solution to create a puzzle
 def puzzle(sudoku)
-  sudoku
+  indices_to_change = (0..80).to_a.sample(30).sort
+  sudoku.map.with_index{|e,i|
+    indices_to_change.include?(i) ? e = "0" : e
+  }
 end
 
 def box_order_to_row_order(cells)
@@ -33,7 +38,7 @@ def box_order_to_row_order(cells)
 end
 
 def generate_new_puzzle_if_necessary
-  return if session[:current_solution]
+  return if session[:current_solution] && session[:solution] && session[:puzzle]
   sudoku = random_sudoku
   session[:solution] = sudoku
   session[:puzzle] = puzzle(sudoku)
@@ -42,6 +47,9 @@ end
 
 def prepare_to_check_solution
   @check_solution = session[:check_solution]
+  if @check_solution
+    flash[:notice] = "Incorrect values are highlighted in yellow"
+  end
   session[:check_solution] = nil
 end
 
@@ -68,7 +76,7 @@ end
 
 helpers do
   def colour_class(solution_to_check, puzzle_value, current_solution_value, solution_value)
-    must_be_guessed = puzzle_value == 0
+    must_be_guessed = puzzle_value.to_i == 0
     tried_to_guess = current_solution_value.to_i != 0
     guessed_incorrectly = current_solution_value != solution_value
 
@@ -76,7 +84,7 @@ helpers do
       'incorrect'
     elsif !must_be_guessed
       'value-provided'
-    end      
+    end
   end
 
   def cell_value(value)
