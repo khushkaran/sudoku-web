@@ -1,12 +1,16 @@
 require 'sinatra'
 require 'sinatra/partial'
 require 'rack-flash'
+require 'yaml'
 require_relative './lib/sudoku'
 require_relative './lib/cell'
 
 enable :sessions
 set :partial_template_engine, :erb
 use Rack::Flash
+CONFIG = YAML.load_file('./config.yml') unless defined? CONFIG
+
+set :session_secret, CONFIG['session_secret']
 
 def random_sudoku
   seed = (1..9).to_a.shuffle + Array.new(81-9, 0)
