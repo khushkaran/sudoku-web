@@ -88,6 +88,8 @@ helpers do
       'incorrect'
     elsif !must_be_guessed
       'value-provided'
+    elsif !guessed_incorrectly
+      'correct'
     end
   end
 

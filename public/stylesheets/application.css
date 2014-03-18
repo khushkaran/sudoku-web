@@ -32,6 +32,10 @@ div.box, div.cell{
 	background-color: #DDD;
 }
 
+.correct{
+	background-color: green;
+}
+
 #flash{
 	margin: 20px;
 }
