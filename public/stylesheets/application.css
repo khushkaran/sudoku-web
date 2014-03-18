@@ -12,6 +12,11 @@ div.box, div.cell{
 	display: inline-block;
 }
 
+.box{
+	/*border: 2px solid black*/
+	outline: 2px solid black
+}
+
 .cell input{
 	width: 30px;
 	height: 30px;
