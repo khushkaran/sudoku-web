@@ -81,7 +81,6 @@ end
 
 get '/solution' do
   redirect to("/") if !session[:current_solution]
-  generate_new_puzzle_if_necessary
   @current_solution = session[:solution]
   @solution = session[:solution]
   @puzzle = session[:puzzle]
