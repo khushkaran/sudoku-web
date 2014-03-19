@@ -66,7 +66,6 @@ get '/' do
   prepare_to_check_solution
   generate_new_puzzle_if_necessary
   @current_solution = session[:current_solution] || session[:puzzle]
-  @current_solution = session[:puzzle] if params[:reset]
   @solution = session[:solution]
   @puzzle = session[:puzzle]
   erb :index
@@ -74,8 +73,9 @@ end
 
 post '/' do
   cells = box_order_to_row_order(params["cell"])
-  session[:current_solution] = cells.map{|value| value.to_i}.join
+  session[:current_solution] = cells.map{|value| value.to_i}.join if !params[:reset]
   session[:check_solution] = true if !params[:save] && !params[:reset]
+  session[:current_solution] = session[:puzzle] if params[:reset]
   redirect to("/")
 end
 
