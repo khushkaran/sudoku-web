@@ -1,7 +1,6 @@
-<h1>Life is too short for playing Sudoku</h1>
-<div id="flash">
-	<%= flash[:notice] %>
-</div>
+<h1>Sudoku</h1>
+<h3>Life is too short for playing Sudoku</h3>
+<div id="flash"><span style="background-color: yellow"><%= flash[:notice] %></span></div>
 <div id="sudoku">
 	<form action="/" method="post">
 		<% 3.times do |row| %>

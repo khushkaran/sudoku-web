@@ -1,6 +1,12 @@
+h1, h3{
+	font-family: Helvetica;
+}
+
 body{
 	text-align: center;
 	font-family: Arial;
+	background-color: navy;
+	color: white;
 }
 
 #sudoku {
@@ -38,4 +44,6 @@ div.new-game, div.box, div.cell {
 
 #flash{
 	margin: 20px;
+	color: black;
+	font-family: Arial Black;
 }
