@@ -14,6 +14,8 @@ CONFIG = YAML.load_file('./config.yml') unless defined? CONFIG
 set :session_secret, CONFIG['session_secret']
 
 def random_sudoku
+  # seed = (1..9).to_a + Array.new(81-9, 0) shuffling entire ray pushes more processing onto server, however doesn't add any benefit
+  # sudoku = Sudoku.new(seed.shuffle.join)
   seed = (1..9).to_a.shuffle + Array.new(81-9, 0)
   sudoku = Sudoku.new(seed.join)
   sudoku.solve!
@@ -72,13 +74,12 @@ end
 post '/' do
   cells = box_order_to_row_order(params["cell"])
   session[:current_solution] = cells.map{|value| value.to_i}.join
-  session[:check_solution] = true
+  session[:check_solution] = true if !params[:save]
   redirect to("/")
 end
 
 get '/solution' do
   redirect to("/") if !session[:current_solution]
-  prepare_to_check_solution
   generate_new_puzzle_if_necessary
   @current_solution = session[:solution]
   @solution = session[:solution]
