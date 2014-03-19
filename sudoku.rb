@@ -22,11 +22,11 @@ end
 
 # this method removes some digits from the solution to create a puzzle
 def puzzle(sudoku,difficulty)
-  levels = {:easy => 30, :medium => 50, :hard => 70}
-  indices_to_change = (0..80).to_a.sample(levels[difficulty]).sort
-  sudoku.map.with_index{|e,i|
-    indices_to_change.include?(i) ? e = "0" : e
-  }
+  sudoku.each_slice(3).to_a.each{|e|
+    e[[0,1,2].sample] = "0"
+    e[[0,1,2].sample] = "0" if difficulty == :medium || difficulty == :hard
+    e[[0,1,2].sample] = "0" if difficulty == :hard
+  }.flatten
 end
 
 def box_order_to_row_order(cells)
