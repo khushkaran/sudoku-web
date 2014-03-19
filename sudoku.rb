@@ -77,6 +77,7 @@ post '/' do
 end
 
 get '/solution' do
+  redirect to("/") if !session[:current_solution]
   prepare_to_check_solution
   generate_new_puzzle_if_necessary
   @current_solution = session[:solution]
