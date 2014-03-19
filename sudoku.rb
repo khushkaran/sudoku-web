@@ -88,6 +88,10 @@ get '/solution' do
   erb :index
 end
 
+get '/help' do
+  erb :help
+end
+
 post '/set' do
   session[:new_difficulty] = params[:difficulty].to_sym
   session[:current_solution] = nil

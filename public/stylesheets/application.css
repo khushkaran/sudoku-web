@@ -2,6 +2,20 @@ h1, h3{
 	font-family: Helvetica;
 }
 
+a{
+	color: white;
+}
+
+.img_left{
+	float: left;
+	margin: 10px;
+}
+
+.img_right{
+	float: right;
+	margin: 10px;
+}
+
 body{
 	text-align: center;
 	font-family: Arial;
