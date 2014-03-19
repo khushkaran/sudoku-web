@@ -1,41 +1,34 @@
-<html>
-<head>
-	<title>Sudoku Game</title>
-	<link href="/stylesheets/application.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<h1>Life is too short for playing Sudoku</h1>
-	<div id="flash">
-		<%= flash[:notice] %>
-	</div>
-	<div id="sudoku">
-		<form action="/" method="post">
-			<% 3.times do |row| %>
-				<div class="row">
-					<% 3.times do |box| %>
-						<div class="box">
-							<% 3.times do |cell_row| %>
-								<div class="cell-row">
-									<% 3.times do |cell| %>
-										<%= partial :cell, :locals=>{:cell_index => row * 27 + box * 3 + cell_row * 9 + cell} %>
-									<% end %>
-								</div>
-							<% end %>
-						</div>
-					<% end %>
-				</div>
-			<% end %>
-			<button>Check solution</button>
-		</form>
-		<form action="/solution" method="get"><button>Show solution</button></form>
-	</div>
-	<div class="new-game">
-		<h3>New Game</h3>
-		<form action="/set" method="post">
-			<button name="difficulty" value="easy">Easy Puzzle</button>
-			<button name="difficulty" value="medium">Medium Puzzle</button>
-			<button name="difficulty" value="hard">Hard Puzzle</button>
-		</form>
-	</div>
-</body>
-</html>
+<h1>Life is too short for playing Sudoku</h1>
+<div id="flash">
+	<%= flash[:notice] %>
+</div>
+<div id="sudoku">
+	<form action="/" method="post">
+		<% 3.times do |row| %>
+			<div class="row">
+				<% 3.times do |box| %>
+					<div class="box">
+						<% 3.times do |cell_row| %>
+							<div class="cell-row">
+								<% 3.times do |cell| %>
+									<%= partial :cell, :locals=>{:cell_index => row * 27 + box * 3 + cell_row * 9 + cell} %>
+								<% end %>
+							</div>
+						<% end %>
+					</div>
+				<% end %>
+			</div>
+		<% end %>
+		<button>Check solution</button>
+	</form>
+	<form action="/solution" method="get"><button>Show solution</button></form>
+</div>
+
+<h3>New Game</h3>
+<div class="new-game">
+	<form action="/set" method="post">
+		<button name="difficulty" value="easy">Easy Puzzle</button>
+		<button name="difficulty" value="medium">Medium Puzzle</button>
+		<button name="difficulty" value="hard">Hard Puzzle</button>
+	</form>
+</div>
