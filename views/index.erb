@@ -27,6 +27,15 @@
 			<% end %>
 			<button>Check solution</button>
 		</form>
+		<form action="/solution" method="get"><button>Show solution</button></form>
+	</div>
+	<div class="new-game">
+		<h3>New Game</h3>
+		<form action="/set" method="post">
+			<button name="difficulty" value="easy">Easy Puzzle</button>
+			<button name="difficulty" value="medium">Medium Puzzle</button>
+			<button name="difficulty" value="hard">Hard Puzzle</button>
+		</form>
 	</div>
 </body>
 </html>

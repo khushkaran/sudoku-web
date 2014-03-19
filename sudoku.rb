@@ -20,8 +20,9 @@ def random_sudoku
 end
 
 # this method removes some digits from the solution to create a puzzle
-def puzzle(sudoku)
-  indices_to_change = (0..80).to_a.sample(30).sort
+def puzzle(sudoku,difficulty)
+  levels = {:easy => 30, :medium => 50, :hard => 70}
+  indices_to_change = (0..80).to_a.sample(levels[difficulty]).sort
   sudoku.map.with_index{|e,i|
     indices_to_change.include?(i) ? e = "0" : e
   }
@@ -42,10 +43,11 @@ def box_order_to_row_order(cells)
 end
 
 def generate_new_puzzle_if_necessary
-  return if session[:current_solution] && session[:solution] && session[:puzzle]
+  return if session[:current_solution]
+  session[:difficulty] = session[:new_difficulty] || :medium
   sudoku = random_sudoku
   session[:solution] = sudoku
-  session[:puzzle] = puzzle(sudoku)
+  session[:puzzle] = puzzle(sudoku, session[:difficulty])
   session[:current_solution] = session[:puzzle]
 end
 
@@ -74,8 +76,18 @@ post '/' do
 end
 
 get '/solution' do
+  prepare_to_check_solution
+  generate_new_puzzle_if_necessary
+  @current_solution = session[:solution]
+  @solution = session[:solution]
   @puzzle = session[:puzzle]
   erb :index
+end
+
+post '/set' do
+  session[:new_difficulty] = params[:difficulty].to_sym
+  session[:current_solution] = nil
+  redirect to("/")
 end
 
 helpers do
