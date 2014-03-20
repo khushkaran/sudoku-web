@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'sinatra/partial'
 require 'rack-flash'
-require 'yaml'
 require_relative './lib/sudoku'
 require_relative './lib/cell'
 require_relative './helpers/application.rb'
@@ -9,9 +8,8 @@ require_relative './helpers/application.rb'
 enable :sessions
 set :partial_template_engine, :erb
 use Rack::Flash
-CONFIG = YAML.load_file('./config.yml') unless defined? CONFIG
 
-set :session_secret, CONFIG['session_secret']
+set :session_secret, 'I am a son of god'
 
 def random_sudoku
   # seed = (1..9).to_a + Array.new(81-9, 0) shuffling entire ray pushes more processing onto server, however doesn't add any benefit
@@ -57,7 +55,8 @@ end
 def prepare_to_check_solution
   @check_solution = session[:check_solution]
   if @check_solution
-    flash[:notice] = "Incorrect values are highlighted in yellow"
+    flash[:incorrect_notice] = "Incorrect values are highlighted in yellow"
+    flash[:correct_notice] = "Correct values are highlighted in green"
   end
   session[:check_solution] = nil
 end
