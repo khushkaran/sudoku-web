@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/partial'
 require 'rack-flash'
 require 'bundler/setup'
+require "newrelic_rpm"
 require_relative './lib/sudoku'
 require_relative './lib/cell'
 require_relative './helpers/application.rb'
