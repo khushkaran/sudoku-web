@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/partial'
 require 'rack-flash'
+require 'bundler/setup'
 require_relative './lib/sudoku'
 require_relative './lib/cell'
 require_relative './helpers/application.rb'
