@@ -8,3 +8,6 @@ Week 5 project at Makers Academy to turn last week's sudoku project into a sinat
 - rack-flash
 - newrelic
 - unicorn
+- Git (GitHub & Heroku)
+- HMTL
+- CSS
