@@ -1,5 +1,7 @@
 Sudoku-web
 ---
+![](sudoku.png?raw=true)
+
 Week 5 Project @makersacademy, set by @antonydenyer & @shadchnev,
 to develop a web UI for last week's "Sudoku" Project.
 However, as it does not solve "harder" Puzzles, this uses
