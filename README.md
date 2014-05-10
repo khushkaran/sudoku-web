@@ -1,4 +1,4 @@
-Sudoku-web
+Sudoku-web [![Code Climate](https://codeclimate.com/github/khushkaran/sudoku-web.png)](https://codeclimate.com/github/khushkaran/sudoku-web)
 ---
 ![](sudoku.png?raw=true)
 
